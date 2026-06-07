@@ -16,10 +16,10 @@ from .log_agent import LogAgent
 _SYSTEM_PROMPT = (
     "Eres un experto en soporte técnico de computadoras. "
     "Responde SIEMPRE en español. "
-    "Responde EXACTAMENTE al problema que describe el usuario. "
-    "Da instrucciones claras, numeradas y paso a paso. "
-    "Usa el contexto del manual como referencia si es relevante, "
-    "pero responde basándote en el problema real del usuario."
+    "Si hay una descripción de imagen o pantalla, úsala como base principal del diagnóstico. "
+    "Responde EXACTAMENTE al problema visual o descrito por el usuario, NO inventes un problema diferente. "
+    "Da instrucciones claras, numeradas y paso a paso para resolver el problema específico. "
+    "Usa el manual técnico solo como referencia complementaria."
 )
 
 
@@ -53,14 +53,18 @@ class ResponseAgent:
         Returns:
             Respuesta técnica en español.
         """
-        prompt = self._build_prompt(query, rag_context, visual_description)
         self.log.log("DIAGNOSTICO", "Enviando contexto a TinyLlama...")
         self.log.log("DIAGNOSTICO", f"Modelo: {LLM_MODEL} | Temp: {LLM_TEMPERATURE}")
 
         try:
+            user_msg = self._build_user_message(query, rag_context, visual_description)
             payload = {
                 "model": LLM_MODEL,
-                "prompt": prompt,
+                "messages": [
+                    {"role": "system",    "content": _SYSTEM_PROMPT},
+                    {"role": "user",      "content": user_msg},
+                    {"role": "assistant", "content": "En español, paso a paso:\n"},
+                ],
                 "stream": False,
                 "options": {
                     "temperature": LLM_TEMPERATURE,
@@ -68,12 +72,12 @@ class ResponseAgent:
                 },
             }
             resp = requests.post(
-                f"{OLLAMA_URL}/api/generate",
+                f"{OLLAMA_URL}/api/chat",
                 json=payload,
                 timeout=OLLAMA_TIMEOUT,
             )
             resp.raise_for_status()
-            answer = resp.json().get("response", "").strip()
+            answer = resp.json().get("message", {}).get("content", "").strip()
             self.log.log("RESPUESTA", f"Respuesta generada ({len(answer)} caracteres).")
             return answer
 
@@ -92,30 +96,25 @@ class ResponseAgent:
 
     # ── Utilidades privadas ──────────────────────────────────────────────────
 
-    def _build_prompt(
+    def _build_user_message(
         self,
         query: str,
         rag_context: list[dict],
         visual_description: str,
     ) -> str:
-        """
-        Construye el prompt estructurado para TinyLlama.
-        Formato simple para evitar que modelos pequeños repitan las instrucciones.
-        """
-        parts = [f"Sistema: {_SYSTEM_PROMPT}"]
+        """Construye el mensaje de usuario para /api/chat."""
+        parts = []
 
-        # La pregunta del usuario va primero para que el LLM la atienda
-        parts.append(f"Problema del usuario: {query}")
-
-        # Contexto del manual técnico (RAG) como referencia secundaria
-        if rag_context:
-            manual_text = " | ".join(c["text"] for c in rag_context)
-            parts.append(f"Información de referencia del manual técnico: {manual_text}")
-
-        # Descripción visual si la hay
+        # Visual va primero — tiene mayor peso para el diagnóstico
         if visual_description and "[" not in visual_description:
-            parts.append(f"Descripción de imagen: {visual_description}")
+            parts.append(f"Lo que se muestra en pantalla: {visual_description}")
 
-        parts.append(f"Responde paso a paso cómo resolver: {query}")
+        parts.append(f"Problema reportado: {query}")
+
+        if rag_context:
+            refs = " | ".join(c["text"][:300] for c in rag_context[:2])
+            parts.append(f"Referencia del manual técnico: {refs}")
+
+        parts.append("Basándote en lo que se muestra en pantalla, da la solución paso a paso en español.")
 
         return "\n".join(parts)

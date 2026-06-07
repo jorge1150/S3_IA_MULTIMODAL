@@ -63,9 +63,12 @@ class VideoAgent:
             pil_img = Image.fromarray(rgb_frame)
 
             self.log.log("VIDEO", f"Analizando frame {frame_idx}/{total_frames}...")
-            desc = self.vision.analyze(pil_img)
-            if desc and "[" not in desc:  # ignorar errores
-                descriptions.append(f"Frame {frames_analyzed+1}: {desc}")
+            try:
+                desc = self.vision.analyze(pil_img)
+                if desc and "[" not in desc:
+                    descriptions.append(f"Frame {frames_analyzed+1}: {desc}")
+            except Exception as exc:
+                self.log.log("VIDEO", f"Frame {frame_idx} omitido: {exc}")
 
             frame_idx += VIDEO_FRAME_INTERVAL
             frames_analyzed += 1

@@ -15,15 +15,14 @@ echo "╚═══════════════════════�
 echo ""
 
 # ── 1. Verificar Python 3.12 ─────────────────────────────────
-# NOTA: PyTorch 2.2.x no tiene wheel para Python 3.13 en macOS Intel.
-# Se requiere Python 3.12 explícitamente.
+# torch 2.2.x no tiene wheel para Python 3.13 en macOS Intel.
 echo "[1/8] Buscando Python 3.12..."
 
 PYTHON=""
-for candidate in python3.12 /usr/local/bin/python3.12 python3 python; do
+for candidate in python3.12 /usr/local/bin/python3.12 /opt/homebrew/bin/python3.12 python3 python; do
     if command -v "$candidate" &>/dev/null; then
-        ver=$("$candidate" --version 2>&1 | grep -oE "3\.(1[012])\.[0-9]+")
-        if [[ "$ver" == 3.12* ]]; then
+        ver=$("$candidate" --version 2>&1 | grep -oE "3\.12\.[0-9]+")
+        if [ -n "$ver" ]; then
             PYTHON="$candidate"
             break
         fi
@@ -33,19 +32,18 @@ done
 if [ -z "$PYTHON" ]; then
     echo "   ✗ Python 3.12 no encontrado."
     echo "   Instálalo con: brew install python@3.12"
-    echo "   O descárgalo desde: https://www.python.org/downloads/"
+    echo "   O descárgalo desde: https://www.python.org/downloads/release/python-3129/"
     exit 1
 fi
 
-echo "   ✓ Usando Python: $($PYTHON --version)"
+echo "   ✓ Usando: $($PYTHON --version)"
 
-# ── 2. Crear entorno virtual con Python 3.12 ─────────────────
+# ── 2. Crear entorno virtual ─────────────────────────────────
 echo "[2/8] Creando entorno virtual (Python 3.12)..."
 if [ -d "venv" ]; then
-    # Verificar que el venv existente es Python 3.12
     VENV_VER=$(venv/bin/python --version 2>&1 | grep -oE "3\.[0-9]+")
     if [[ "$VENV_VER" != "3.12" ]]; then
-        echo "   ⚠ venv existente es $VENV_VER. Recreando con Python 3.12..."
+        echo "   ⚠ venv existente es Python $VENV_VER. Recreando con Python 3.12..."
         rm -rf venv
         $PYTHON -m venv venv
     else
@@ -73,62 +71,66 @@ if command -v brew &>/dev/null; then
         echo "   ✓ PortAudio instalado."
     fi
 else
-    echo "   ⚠ Homebrew no encontrado. Si sounddevice falla:"
-    echo "     /bin/bash -c \"\$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\""
-    echo "     brew install portaudio"
+    echo "   ⚠ Homebrew no encontrado. Instálalo desde https://brew.sh"
+    echo "     Luego: brew install portaudio"
 fi
 
 # ── 5. Instalar dependencias Python ──────────────────────────
-# El orden importa: numpy<2 debe instalarse antes de opencv
+# Orden importante: numpy<2 antes que torch y opencv
 echo "[5/8] Instalando dependencias Python..."
 
-# Primero: núcleo
+echo "   → Núcleo (numpy, scipy, Pillow)..."
 pip install "numpy<2" requests scipy sounddevice Pillow python-dotenv -q
 
-# PyTorch (solo desde PyPI, no desde el índice /cpu que no tiene macOS Intel Py3.12)
 echo "   → PyTorch 2.2.2 (puede tardar ~2 min)..."
 pip install "torch==2.2.2" "torchvision==0.17.2" -q
 
-# OpenCLIP, faster-whisper, ChromaDB
 echo "   → OpenCLIP, faster-whisper, ChromaDB..."
-pip install open_clip_torch faster-whisper chromadb -q
+pip install open_clip_torch faster-whisper "chromadb>=0.5.0" -q
 
-# OpenCV 4.8 (última versión compatible con numpy<2)
-echo "   → OpenCV 4.8 (numpy<2 compatible)..."
+echo "   → OpenCV 4.8 (compatible con numpy<2)..."
 pip install "opencv-python==4.8.1.78" -q
 
-# Piper TTS y Gradio
-echo "   → Piper TTS y Gradio..."
-pip install piper-tts gradio -q
+echo "   → Piper TTS (>=1.4.0) y Gradio 6.16.0..."
+pip install "piper-tts>=1.4.0" "gradio==6.16.0" -q
 
 echo "   ✓ Todas las dependencias instaladas."
 
 # ── 6. Verificar imports ─────────────────────────────────────
 echo "[6/8] Verificando imports críticos..."
 python -c "
-import warnings; warnings.filterwarnings('ignore')
+import os, warnings
+warnings.filterwarnings('ignore')
+os.environ['KMP_DUPLICATE_LIB_OK'] = 'TRUE'
 import torch, open_clip, chromadb, faster_whisper, gradio, sounddevice, cv2
 from piper import PiperVoice
-print(f'   torch={torch.__version__} | numpy compatible | gradio={gradio.__version__}')
-print('   ✓ Todos los módulos OK')
+print(f'   torch={torch.__version__}')
+print(f'   gradio={gradio.__version__}')
+print(f'   chromadb={chromadb.__version__}')
+print('   ✓ Todos los módulos importan correctamente.')
 "
 
 # ── 7. Ollama ────────────────────────────────────────────────
 echo "[7/8] Verificando Ollama..."
 if ! command -v ollama &>/dev/null; then
     echo "   Instalando Ollama..."
-    brew install ollama 2>/dev/null || curl -fsSL https://ollama.com/install.sh | sh
+    if command -v brew &>/dev/null; then
+        brew install ollama
+    else
+        curl -fsSL https://ollama.com/install.sh | sh
+    fi
 fi
 echo "   ✓ Ollama: $(ollama --version 2>/dev/null || echo 'instalado')"
 
-# Verificar si el servicio está activo
 if curl -s http://localhost:11434/api/tags &>/dev/null; then
-    echo "   ✓ Ollama ya está ejecutándose."
-    echo "   Descargando modelos..."
+    echo "   ✓ Ollama activo. Descargando modelos..."
     ollama pull tinyllama
     ollama pull moondream
+    echo "   ✓ Modelos descargados."
 else
-    echo "   ⚠ Ollama no está ejecutándose. Ejecuta en otra terminal:"
+    echo ""
+    echo "   ⚠ Ollama no está ejecutándose."
+    echo "   Antes de usar el sistema, en otra terminal ejecuta:"
     echo "       ollama serve"
     echo "   Luego descarga los modelos:"
     echo "       ollama pull tinyllama"
@@ -136,7 +138,7 @@ else
 fi
 
 # ── 8. Piper TTS + Base vectorial ────────────────────────────
-echo "[8/8] Descargando modelo Piper TTS y construyendo ChromaDB..."
+echo "[8/8] Descargando modelo TTS y construyendo base vectorial..."
 python audio/download_piper.py
 python rag/build_db.py
 
@@ -147,7 +149,7 @@ echo "║           ✓  INSTALACIÓN COMPLETADA                      ║"
 echo "╠══════════════════════════════════════════════════════════╣"
 echo "║  Para iniciar el sistema:                                ║"
 echo "║    1. source venv/bin/activate                           ║"
-echo "║    2. ollama serve          ← otra terminal              ║"
+echo "║    2. ollama serve    ← en otra terminal                 ║"
 echo "║    3. python app.py                                      ║"
 echo "║                                                          ║"
 echo "║  Interfaz: http://localhost:7864                         ║"

@@ -97,7 +97,7 @@ MOONDREAM_PROMPT: str = (
 # VIDEO
 # ─────────────────────────────────────────────
 VIDEO_FRAME_INTERVAL: int = 30     # procesar 1 frame de cada N
-VIDEO_MAX_FRAMES: int = 5          # máximo de frames a analizar
+VIDEO_MAX_FRAMES: int = 2          # máximo de frames a analizar (Moondream ~60s/frame en CPU)
 
 # ─────────────────────────────────────────────
 # RUTAS DEL SISTEMA

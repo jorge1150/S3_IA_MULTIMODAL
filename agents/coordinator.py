@@ -114,10 +114,16 @@ class CoordinatorAgent:
         all_visual = " | ".join(filter(None, [visual_description, video_description]))
 
         # ── [RAG] — Búsqueda en manual técnico ──────────────────────────────
-        self.log_agent.log("RAG", f"Buscando soluciones para: «{full_query[:60]}»...")
+        # Si hay descripción visual, combinarla con la query para que el RAG
+        # busque el manual correcto (ej: BSOD → pantalla_azul, no audio)
+        rag_query = full_query
+        if all_visual and "[" not in all_visual:
+            rag_query = f"{full_query} {all_visual}"
+
+        self.log_agent.log("RAG", f"Buscando soluciones para: «{rag_query[:80]}»...")
         yield stt_text, response, None, self.log_agent.get_all()
 
-        rag_chunks = self.rag_agent.retrieve(full_query)
+        rag_chunks = self.rag_agent.retrieve(rag_query)
         n_chunks = len(rag_chunks)
         if n_chunks:
             self.log_agent.log("RAG", f"✓ {n_chunks} fragmento(s) relevante(s) encontrados.")

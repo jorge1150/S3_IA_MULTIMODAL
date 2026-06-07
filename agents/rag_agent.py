@@ -122,14 +122,21 @@ class RAGAgent:
     def _keyword_rerank(self, query: str, chunks: list[dict]) -> list[dict]:
         """
         Re-rankea chunks por solapamiento de palabras clave con la query.
-        Boost extra si el nombre del archivo fuente contiene palabras del query.
-        Necesario porque CLIP fue entrenado para visión, no búsqueda de texto.
+        - text_hits: la palabra aparece en el texto del chunk.
+        - source_hits: la palabra coincide EXACTAMENTE con un token del ID
+          (ej: "audio_problemas_0007" → tokens {"audio","problemas"}).
+          Evita falsos positivos por subcadenas ("problema" ⊂ "audio_problemas").
         """
+        import re
         _STOPWORDS = {
             'para', 'como', 'cuando', 'pero', 'esto', 'esta', 'este', 'que',
             'del', 'los', 'las', 'una', 'unos', 'unas', 'por', 'con', 'sin',
             'sobre', 'entre', 'bajo', 'hace', 'tiene', 'tengo', 'puede',
             'puedo', 'creo', 'bien', 'mal', 'muy', 'hay', 'ser', 'está',
+            # Palabras genéricas que aparecen en todos los chunks — no aportan señal
+            'problema', 'problemas', 'solucion', 'solución', 'muestra',
+            'analiza', 'computadora', 'computadoras', 'sistema', 'paso',
+            'causa', 'causas', 'tipo', 'tipos',
         }
         query_words = {
             w.lower().strip('.,;:!?¡¿')
@@ -141,14 +148,13 @@ class RAGAgent:
 
         for chunk in chunks:
             text_lower = chunk["text"].lower()
-            id_lower = chunk["id"].lower()  # p.ej. "sin_internet_0003"
+            # Tokens exactos del ID: "windows_basico_0000" → {"windows","basico"}
+            id_tokens = set(re.split(r'[_\d]+', chunk["id"].lower())) - {''}
 
-            # Hits en el texto del chunk
             text_hits = sum(1 for w in query_words if w in text_lower)
-            # Bonus si la palabra clave aparece en el nombre del archivo fuente
-            source_hits = sum(1 for w in query_words if w in id_lower)
+            source_hits = sum(1 for w in query_words if w in id_tokens)  # exacto, no subcadena
 
-            boost = 1.0 + 0.10 * text_hits + 0.25 * source_hits
+            boost = 1.0 + 0.10 * text_hits + 0.30 * source_hits
             chunk["similarity"] = round(chunk["similarity"] * boost, 3)
 
         return sorted(chunks, key=lambda x: x["similarity"], reverse=True)
