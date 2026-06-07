@@ -1,0 +1,109 @@
+# ══════════════════════════════════════════════════════════════
+# .gitignore — S3 IA Multimodal
+# Excluye: entorno virtual, modelos descargados, DB vectorial,
+#          archivos temporales, logs y caché de Python.
+# ══════════════════════════════════════════════════════════════
+
+# ── Entorno virtual Python ────────────────────────────────────
+venv/
+.venv/
+env/
+ENV/
+
+# ── Python — bytecode y caché ─────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+.Python
+*.egg
+*.egg-info/
+dist/
+build/
+eggs/
+.eggs/
+
+# ── Base vectorial ChromaDB (se regenera con build_db.py) ─────
+vector_db/
+
+# ── Modelos de IA descargados (binarios pesados) ──────────────
+# Piper TTS (~60 MB): se descargan con python audio/download_piper.py
+audio/piper_models/*.onnx
+audio/piper_models/*.onnx.json
+
+# Whisper: faster-whisper los descarga automáticamente en ~/.cache
+# OpenCLIP: se descarga en ~/.cache/huggingface
+
+# ── Archivos de audio temporales ──────────────────────────────
+temp/
+*.wav
+*.mp3
+*.aiff
+*.m4a
+*.ogg
+
+# ── Logs del sistema ──────────────────────────────────────────
+logs/
+*.log
+
+# ── macOS ─────────────────────────────────────────────────────
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+.AppleDouble
+.LSOverride
+*.icloud
+
+# ── IDE y editores ────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.cursor/
+*.code-workspace
+
+# ── Jupyter ───────────────────────────────────────────────────
+.ipynb_checkpoints/
+*.ipynb
+
+# ── Variables de entorno y secretos ──────────────────────────
+.env
+.env.local
+.env.*.local
+secrets.json
+credentials.json
+
+# ── Binarios y pesos de modelos grandes ──────────────────────
+*.pt
+*.pth
+*.bin
+*.pkl
+*.safetensors
+*.ckpt
+
+# ── Archivos comprimidos ──────────────────────────────────────
+*.zip
+*.tar.gz
+*.tgz
+*.rar
+*.7z
+
+# ── Caché de Hugging Face y pip ──────────────────────────────
+.cache/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# ── Pytest ────────────────────────────────────────────────────
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# ── Gradio cache interno ──────────────────────────────────────
+gradio_cached_examples/
+flagged/

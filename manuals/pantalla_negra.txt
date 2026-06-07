@@ -1,0 +1,38 @@
+PROBLEMA: PANTALLA NEGRA
+CATEGORIA: Visualizacion y Arranque
+SISTEMAS: Windows, Linux, macOS
+
+TIPOS DE PANTALLA NEGRA:
+Tipo 1: Pantalla negra al encender, sin nada en pantalla. Problema de hardware o POST fallido.
+Tipo 2: Pantalla negra despues del logo de Windows. Problema de drivers o servicios de inicio.
+Tipo 3: Pantalla negra con cursor del mouse visible. Problema del Explorador de Windows.
+Tipo 4: Pantalla negra despues de actualizar. Incompatibilidad de driver de video.
+
+SOLUCION TIPO 1 - PANTALLA NEGRA AL ENCENDER:
+Paso 1: Verificar que el monitor este encendido y el cable de video este bien conectado. Probar desconectar y reconectar el cable HDMI, DisplayPort o VGA.
+Paso 2: Verificar que el monitor este configurado en la entrada correcta. Presionar el boton Menu del monitor y seleccionar la fuente de entrada correcta.
+Paso 3: Si el computador tiene GPU dedicada, conectar el monitor al puerto de video de la GPU, no al de la tarjeta madre.
+Paso 4: Retirar dispositivos externos: memorias USB, discos externos, impresoras. Reiniciar. A veces el BIOS intenta iniciar desde estos dispositivos.
+Paso 5: Probar con otro monitor o cable de video para descartar que sea el monitor el danado.
+Paso 6: Escuchar los pitidos al encender el equipo. Un pitido largo y dos cortos indica problema con la tarjeta de video. Tres pitidos cortos indica problema con la RAM.
+Paso 7: Retirar y reinsertar los modulos de RAM. Limpiar los contactos con borrador de lapiz suavemente.
+
+SOLUCION TIPO 2 - PANTALLA NEGRA DESPUES DEL LOGO:
+Paso 1: Arrancar en Modo Seguro. Al encender presionar F8 repetidamente o mantener Shift al hacer clic en Reiniciar. Seleccionar Modo seguro con funciones de red.
+Paso 2: En Modo Seguro, ir al Administrador de dispositivos, Adaptadores de pantalla. Desinstalar el driver de video. Reiniciar normalmente. Windows instalara un driver basico.
+Paso 3: Si no se puede entrar al Modo Seguro, usar un USB de instalacion de Windows, ir a Reparar equipo, Solucionar problemas, Opciones avanzadas, Inicio de reparacion.
+Paso 4: Restaurar el sistema a un punto anterior al problema desde Opciones avanzadas, Restaurar sistema.
+
+SOLUCION TIPO 3 - PANTALLA NEGRA CON CURSOR:
+Paso 1: Presionar Ctrl+Alt+Supr para abrir el Administrador de Tareas.
+Paso 2: En Administrador de Tareas, Archivo, Ejecutar nueva tarea. Escribir explorer.exe y presionar Aceptar.
+Paso 3: Si explorer.exe no funciona, ir a procesos, buscar Windows Explorer, clic derecho, Reiniciar.
+
+SOLUCION TIPO 4 - PANTALLA NEGRA DESPUES DE ACTUALIZACION:
+Paso 1: Desinstalar la actualizacion problematica. Desde Modo Seguro, ir a Configuracion, Actualizacion y seguridad, Ver historial de actualizaciones, Desinstalar actualizaciones. Eliminar la mas reciente.
+Paso 2: Ejecutar: sfc /scannow en CMD como administrador para reparar archivos del sistema corruptos.
+Paso 3: Ejecutar: DISM /Online /Cleanup-Image /RestoreHealth para reparar la imagen del sistema.
+
+DIAGNOSTICO EN MACOS:
+Reiniciar en Modo Seguro manteniendo la tecla Shift. Esto verifica el disco y carga solo extensiones esenciales.
+Reiniciar NVRAM manteniendo Command+Option+P+R durante 20 segundos al arrancar.

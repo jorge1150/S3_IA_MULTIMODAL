@@ -1,0 +1,31 @@
+PROBLEMA: COMPUTADORA NO ENCIENDE
+CATEGORIA: Hardware y Arranque
+SISTEMAS: Todos
+
+DIAGNOSTICO INICIAL:
+Cuando una computadora no enciende completamente, el problema puede ser electrico, de hardware o de la placa madre. Seguir los pasos en orden desde el mas simple al mas complejo.
+
+SOLUCION PASO A PASO:
+Paso 1: Verificar la fuente de alimentacion. Comprobar que el cable de corriente este bien conectado al computador y al tomacorriente. Probar con otro tomacorriente o con otro cable de corriente.
+Paso 2: Verificar el interruptor de voltaje de la fuente de poder. En la parte trasera del CPU puede haber un interruptor marcado 115V o 230V. Verificar que este en el voltaje correcto segun el pais.
+Paso 3: Presionar el boton de encendido por 10 segundos para forzar el apagado completo si el equipo estaba en estado hibernate. Esperar 30 segundos y volver a encender.
+Paso 4: Desconectar todos los perifericos externos: monitores adicionales, discos USB, impresoras, hubs USB. Intentar encender solo con el cable de corriente.
+Paso 5: Verificar si los ventiladores del CPU giran al encender. Si giran pero no hay imagen en pantalla, es problema de video o RAM. Si no gira nada, es la fuente de poder.
+Paso 6: Retirar la bateria del BIOS en la placa madre, una pila redonda CR2032. Esperar 5 minutos, reinsertarla. Esto resetea el BIOS y puede solucionar configuraciones incorrectas.
+Paso 7: Verificar la RAM. Retirar todos los modulos RAM, limpiar los contactos dorados con un borrador suave y reinsertarlos. Si hay dos modulos, probar con solo uno a la vez.
+Paso 8: Verificar que todos los cables internos de la fuente de poder esten bien conectados a la placa madre, especialmente el conector de 24 pines y el de 4 u 8 pines del procesador.
+Paso 9: Si el equipo tiene GPU dedicada, retirarla y conectar el monitor al puerto de video integrado en la placa madre para probar si el problema es la GPU.
+Paso 10: Probar con una fuente de poder de reemplazo si es posible. Una fuente defectuosa es causa comun de que el equipo no encienda.
+
+EN LAPTOPS:
+Paso 1: Retirar la bateria si es removible. Conectar solo el adaptador de corriente y encender.
+Paso 2: Con el adaptador conectado, mantener el boton de encendido 30 segundos para descargar electricidad estatica residual.
+Paso 3: Verificar que el LED del adaptador de corriente este encendido, indicando que el adaptador funciona.
+Paso 4: Si la laptop cae al piso o recibio golpe, puede haberse desconectado el conector de la bateria internamente.
+
+INDICADORES SONOROS DEL BIOS:
+Un pitido: sistema OK, problema de video.
+Dos pitidos: problema de RAM detectado.
+Tres pitidos: falla de RAM o teclado.
+Pitidos continuos: problema grave de hardware, posiblemente la placa madre.
+Sin pitidos y sin imagen: fuente de poder danada o procesador.

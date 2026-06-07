@@ -1,0 +1,33 @@
+PROBLEMA: COMPUTADORA LENTA Y RENDIMIENTO BAJO
+CATEGORIA: Rendimiento del Sistema
+SISTEMAS: Windows, Linux, macOS
+
+DIAGNOSTICO:
+Una computadora lenta puede deberse a programas iniciando con Windows, virus, disco duro lleno, RAM insuficiente, sobrecalentamiento, fragmentacion del disco o malware ejecutandose en segundo plano.
+
+SOLUCION EN WINDOWS:
+Paso 1: Verificar el uso de recursos. Abrir el Administrador de Tareas con Ctrl+Shift+Esc. Revisar los procesos que consumen mas CPU, Memoria y Disco. Si un proceso desconocido usa mas del 50% de CPU, puede ser malware.
+Paso 2: Deshabilitar programas en el inicio. En el Administrador de Tareas ir a la pestana Inicio. Hacer clic derecho en programas innecesarios y seleccionar Deshabilitar. Reiniciar el equipo.
+Paso 3: Liberar espacio en disco. Abrir Explorador de archivos, hacer clic derecho en el disco C, Propiedades, Liberar espacio. Eliminar archivos temporales, miniaturas y la papelera.
+Paso 4: Verificar virus con Windows Defender. Abrir Seguridad de Windows, Proteccion antivirus, Examen rapido. Ejecutar tambien un Examen completo si hay sospechas.
+Paso 5: Desfragmentar el disco. Solo para discos HDD mecanicos. Buscar Desfragmentar y optimizar unidades en el menu inicio. Para SSD no desfragmentar, usar Optimizar.
+Paso 6: Aumentar RAM virtual. En Propiedades del sistema, Configuracion avanzada del sistema, Rendimiento, Opciones avanzadas, Memoria virtual. Configurar en automatica.
+Paso 7: Verificar temperatura. Descargar HWMonitor o CPU-Z para ver temperaturas. Si el procesador supera 90 grados, limpiar el ventilador y aplicar pasta termica.
+
+SOLUCION EN LINUX:
+Paso 1: Ver procesos pesados: top o htop en terminal. Identificar el PID del proceso lento y terminarlo con: kill -9 PID.
+Paso 2: Ver uso de memoria: free -h. Si la RAM esta llena, identificar que aplicacion la consume.
+Paso 3: Limpiar cache de paquetes: sudo apt clean y sudo apt autoremove en Ubuntu o Debian.
+Paso 4: Verificar disco lleno: df -h. Si algun sistema de archivos esta al 100%, liberar espacio eliminando archivos grandes.
+
+SOLUCION EN MACOS:
+Paso 1: Verificar en Monitor de Actividad los procesos que mas CPU consumen.
+Paso 2: Limpiar almacenamiento. Apple, Configuracion del sistema, General, Almacenamiento. Eliminar archivos no utilizados.
+Paso 3: Reiniciar el modulo SMC: apagar, esperar 15 segundos, mantener Shift+Control+Option+Power durante 10 segundos.
+Paso 4: Limpiar cache del sistema. En Terminal: sudo purge para liberar memoria inactiva.
+
+OPTIMIZACIONES PERMANENTES:
+Instalar mas RAM si el sistema la soporta para mejorar el multitarea.
+Reemplazar disco HDD por un SSD reduce el tiempo de arranque de 3 minutos a 20 segundos.
+Reinstalar el sistema operativo si la lentitud persiste mas de 2 anos sin mantenimiento.
+Limpiar fisicamente el interior del equipo, especialmente el ventilador del procesador, cada 6 meses.

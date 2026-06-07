@@ -1,0 +1,38 @@
+PROBLEMA: PROBLEMAS DE ACTUALIZACIONES
+CATEGORIA: Sistema Operativo y Software
+SISTEMAS: Windows, Linux, macOS
+
+PROBLEMAS COMUNES:
+Tipo 1: Windows Update no instala actualizaciones, muestra errores.
+Tipo 2: El equipo queda atascado actualizando con porcentaje congelado.
+Tipo 3: Una actualizacion causo problemas y se necesita revertir.
+Tipo 4: Las actualizaciones consumen demasiado espacio en disco.
+
+SOLUCION WINDOWS UPDATE CON ERRORES:
+Paso 1: Ejecutar el Solucionador de problemas de Windows Update. Configuracion, Actualizacion y seguridad, Solucionar problemas, Windows Update.
+Paso 2: Limpiar la cache de Windows Update. Abrir CMD como administrador y ejecutar: net stop wuauserv, net stop cryptSvc, net stop bits, net stop msiserver. Luego eliminar el contenido de C:\Windows\SoftwareDistribution\Download. Finalmente reiniciar los servicios.
+Paso 3: Si hay un error especifico como 0x80070002 o 0x80240022, buscar ese codigo en el catalogo de errores de Microsoft para la solucion especifica.
+Paso 4: Verificar la fecha y hora del sistema. Las actualizaciones pueden fallar si la hora esta incorrecta. Configuracion, Hora e idioma, activar Establecer hora automaticamente.
+Paso 5: Desactivar el antivirus temporalmente durante la actualizacion, ya que puede interferir con el proceso.
+
+SOLUCION ACTUALIZACION CONGELADA:
+Paso 1: Esperar al menos 2 horas antes de asumir que esta congelada. Algunas actualizaciones grandes toman mucho tiempo.
+Paso 2: Si el porcentaje no ha cambiado en 2 horas, forzar el apagado manteniendo el boton de encendido 10 segundos.
+Paso 3: Al reiniciar, Windows puede deshacer la actualizacion automaticamente. Si no lo hace, ir a Modo Seguro.
+Paso 4: Desde Modo Seguro, ejecutar: sfc /scannow en CMD como administrador para reparar archivos del sistema.
+Paso 5: Desde Entorno de Recuperacion de Windows ejecutar: DISM /Online /Cleanup-Image /RestoreHealth.
+
+REVERTIR UNA ACTUALIZACION PROBLEMATICA:
+Paso 1: Configuracion, Actualizacion y seguridad, Ver historial de actualizaciones, Desinstalar actualizaciones.
+Paso 2: Ordenar por Fecha de instalacion y eliminar las mas recientes.
+Paso 3: Para actualizaciones de caracteristicas mayores como Windows 10 a 11, hay un plazo de 10 dias para revertir desde Configuracion, Actualizacion y seguridad, Recuperacion, Volver.
+Paso 4: Crear un punto de restauracion antes de cada actualizacion mayor para tener una opcion de retroceso segura.
+
+ACTUALIZACIONES EN LINUX:
+Actualizar Ubuntu o Debian: sudo apt update y sudo apt upgrade.
+Actualizar Fedora: sudo dnf upgrade.
+Si una actualizacion rompe el sistema, iniciar con el kernel anterior desde el menu de Grub al encender.
+
+ACTUALIZACIONES EN MACOS:
+Ir a Menu Apple, Configuracion del Sistema, General, Actualizacion de Software.
+Si una actualizacion falla, reiniciar en Modo de Recuperacion con Command+R y usar las utilidades de disco para reparar.

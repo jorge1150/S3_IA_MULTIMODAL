@@ -1,0 +1,41 @@
+PROBLEMA: PROBLEMAS DE AUDIO
+CATEGORIA: Sonido y Multimedia
+SISTEMAS: Windows, Linux, macOS
+
+TIPOS DE PROBLEMAS DE AUDIO:
+Tipo 1: Sin sonido en los altavoces o audifonos.
+Tipo 2: Sonido distorsionado o con ruido.
+Tipo 3: Microfono no funciona o no graba.
+Tipo 4: Sonido funciona en algunos programas pero no en otros.
+
+SOLUCION SIN SONIDO EN WINDOWS:
+Paso 1: Verificar que el volumen no este silenciado. Hacer clic en el icono de altavoz en la barra de tareas. Subir el volumen al maximo para diagnosticar.
+Paso 2: Verificar que el dispositivo de audio correcto este seleccionado. Clic derecho en el icono de altavoz, Dispositivos de reproduccion. El dispositivo activo debe tener una marca de verificacion verde.
+Paso 3: Si el icono de altavoz muestra una X roja, el servicio de audio esta detenido. Abrir Servicios, buscar Windows Audio y Windows Audio Endpoint Builder, iniciarlos y configurarlos como Automatico.
+Paso 4: Actualizar o reinstalar el driver de audio. En el Administrador de dispositivos, Controladores de sonido, video y juegos, clic derecho en el dispositivo de audio y Actualizar controlador.
+Paso 5: Ejecutar el solucionador de problemas de audio. Configuracion, Sistema, Sonido, Solucionar problemas.
+Paso 6: Verificar que el conector de audio este en el puerto correcto. Para altavoces conectar en el jack verde (Line Out). Para microfono en el jack rosa (Mic In).
+
+SOLUCION MICROFONO NO FUNCIONA EN WINDOWS:
+Paso 1: Ir a Configuracion, Privacidad, Microfono. Verificar que el acceso al microfono este activado para Windows y para las aplicaciones especificas.
+Paso 2: En Dispositivos de grabacion, verificar que el microfono correcto este como dispositivo predeterminado. Clic derecho y Establecer como predeterminado.
+Paso 3: Hacer clic derecho en el microfono, Propiedades, Niveles. Subir el volumen del microfono al 80 por ciento y activar la amplificacion si esta disponible.
+Paso 4: Probar el microfono en Configuracion, Sistema, Sonido, Probar el microfono.
+
+SOLUCION EN LINUX:
+Paso 1: Verificar dispositivos de audio: aplay -l para salida y arecord -l para entrada.
+Paso 2: Instalar pulseaudio si no esta: sudo apt install pulseaudio. Reiniciar con: pulseaudio -k y pulseaudio --start.
+Paso 3: Abrir el mezclador de volumen: pavucontrol. Verificar que ningun canal este silenciado.
+Paso 4: Verificar driver de audio con: lspci | grep -i audio. Instalar driver si es necesario.
+
+SOLUCION EN MACOS:
+Paso 1: Preferencias del Sistema, Sonido, Salida. Seleccionar el dispositivo correcto y subir el volumen.
+Paso 2: Reiniciar el controlador de audio en Terminal: sudo killall coreaudiod.
+Paso 3: Si usa audifonos Bluetooth, desemparejar y emparejar de nuevo el dispositivo.
+Paso 4: Verificar que el jack de audio no tenga pelusa o suciedad. Limpiar con un hisopo de algodon seco.
+
+SONIDO DISTORSIONADO:
+Cable de audio danado: reemplazar el cable.
+Driver de audio desactualizado: actualizar desde el sitio del fabricante.
+Interferencia electromagnetica: alejar el cable de audio de cables de corriente o adaptadores de corriente.
+Tarjeta de sonido danada: reemplazar la tarjeta de sonido interna o usar un adaptador USB de audio externo.

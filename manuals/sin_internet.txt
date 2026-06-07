@@ -1,0 +1,38 @@
+PROBLEMA: SIN CONEXION A INTERNET
+CATEGORIA: Red y Conectividad
+SISTEMAS: Windows, Linux, macOS
+
+DIAGNOSTICO RAPIDO:
+Cuando una computadora no tiene internet, el problema puede estar en el adaptador de red, el router, el cable de red, la configuracion de DNS, el driver del adaptador o el firewall del sistema.
+
+SOLUCION PASO A PASO - WINDOWS:
+Paso 1: Verificar el estado fisico de la conexion. Si es cable de red, comprobar que este bien conectado en el puerto del computador y en el router. Si es WiFi, verificar que el adaptador inalambrico este activado con la tecla Fn+F2 o similar.
+Paso 2: Ejecutar el solucionador de problemas de red. Ir a Configuracion, Redes e Internet, Estado, y hacer clic en Solucionador de problemas de red. Windows intentara detectar y corregir el problema automaticamente.
+Paso 3: Renovar la direccion IP. Abrir CMD como administrador y ejecutar: ipconfig /release seguido de ipconfig /renew. Esto solicita una nueva direccion IP al router.
+Paso 4: Limpiar la cache DNS. En CMD ejecutar: ipconfig /flushdns. Esto elimina entradas DNS corruptas que bloquean la navegacion.
+Paso 5: Restablecer el stack TCP/IP. En CMD ejecutar: netsh int ip reset y netsh winsock reset. Reiniciar el computador despues.
+Paso 6: Verificar el driver del adaptador de red. Ir al Administrador de dispositivos, buscar Adaptadores de red, hacer clic derecho y seleccionar Actualizar controlador.
+Paso 7: Si el problema persiste, reiniciar el router. Desconectar el router de la corriente durante 30 segundos y volver a conectar.
+
+SOLUCION PASO A PASO - LINUX:
+Paso 1: Verificar interfaces de red con el comando: ip addr show. Comprobar que la interfaz eth0 o wlan0 tenga una direccion IP asignada.
+Paso 2: Reiniciar el servicio de red: sudo systemctl restart NetworkManager.
+Paso 3: Verificar conectividad con ping: ping -c 4 8.8.8.8. Si responde hay conexion pero el DNS falla.
+Paso 4: Verificar DNS editando: sudo nano /etc/resolv.conf y agregar nameserver 8.8.8.8.
+Paso 5: Para WiFi verificar que el driver este activo: sudo rfkill list. Si aparece blocked, ejecutar: sudo rfkill unblock wifi.
+
+SOLUCION PASO A PASO - MACOS:
+Paso 1: Abrir Preferencias del Sistema, Red. Verificar que la interfaz activa tenga estado Conectado.
+Paso 2: Renovar DHCP. Hacer clic en Avanzado, pestaña TCP/IP y Renovar concesion DHCP.
+Paso 3: Limpiar DNS en Terminal: sudo dscacheutil -flushcache y sudo killall -HUP mDNSResponder.
+Paso 4: Diagnostico de red. Mantener Alt y hacer clic en el icono WiFi para abrir Diagnostico inalambrico.
+Paso 5: Si es WiFi, olvidar la red y volver a conectar con la contrasena correcta.
+
+CAUSAS COMUNES Y SOLUCIONES:
+Red WiFi con contrasena incorrecta: olvidar la red y reconectar correctamente.
+Driver de red desactualizado: descargar driver desde la pagina del fabricante de la tarjeta madre.
+IP duplicada en la red: cambiar manualmente la IP del computador a una no utilizada.
+Firewall bloqueando conexion: verificar reglas del firewall y desactivar temporalmente para diagnosticar.
+Proveedor de internet sin servicio: verificar con el ISP o desde otro dispositivo si hay internet en el router.
+Cable de red danado: reemplazar el cable de red por uno nuevo.
+Puerto del switch o router danado: conectar a otro puerto del router.

@@ -1,0 +1,35 @@
+PROBLEMAS BASICOS DE LINUX
+CATEGORIA: Sistema Operativo Linux
+DISTRIBUCIONES: Ubuntu, Debian, Fedora, Linux Mint
+
+PROBLEMA: SISTEMA NO ARRANCA DESPUES DE ACTUALIZACION:
+Al actualizar el kernel puede ocurrir incompatibilidad.
+Solucion: En el menu de inicio Grub, seleccionar Opciones avanzadas para Ubuntu y elegir un kernel anterior. Una vez en el sistema, anclar el kernel que funciona con: sudo apt-mark hold linux-image-$(uname -r).
+
+PROBLEMA: PANTALLA DE LOGIN EN BUCLE:
+Al ingresar las credenciales, la pantalla parpadea y vuelve al login.
+Solucion paso 1: Ir a una terminal virtual con Ctrl+Alt+F2. Iniciar sesion con usuario y contrasena.
+Solucion paso 2: Ejecutar: rm -rf ~/.Xauthority y reiniciar el servidor grafico con: sudo systemctl restart gdm3 o lightdm.
+Solucion paso 3: Verificar espacio en disco: df -h. Si el directorio home esta lleno la sesion grafica no puede iniciar.
+
+PROBLEMA: PERMISO DENEGADO AL EJECUTAR ARCHIVOS:
+El archivo existe pero no se puede ejecutar.
+Solucion: Dar permisos de ejecucion con: chmod +x nombre_archivo.sh. Para ejecutarlo: ./nombre_archivo.sh. Los archivos descargados de internet no tienen permisos de ejecucion por defecto como medida de seguridad.
+
+PROBLEMA: WIFI NO FUNCIONA EN LINUX:
+Los drivers de WiFi no siempre estan incluidos por defecto.
+Solucion paso 1: Verificar si el adaptador es detectado: lspci | grep -i wireless.
+Solucion paso 2: Buscar el driver para ese adaptador e instalarlo. Para chips Broadcom en Ubuntu: sudo apt install broadcom-sta-dkms.
+Solucion paso 3: Verificar si la interfaz esta activa: ip link show. Si aparece DOWN ejecutar: sudo ip link set wlan0 up.
+
+PROBLEMA: DISCO LLENO EN LINUX:
+Solucion: Ver uso de disco: df -h. Ver directorios mas grandes: du -sh /* 2>/dev/null | sort -hr | head. Limpiar cache de apt: sudo apt clean. Eliminar kernels viejos: sudo apt autoremove. Los logs de sistema pueden crecer mucho en /var/log, limpiar con: sudo journalctl --vacuum-time=7d.
+
+PROBLEMA: PROCESO QUE NO RESPONDE:
+Solucion: Ver procesos: ps aux o top. Terminar proceso por nombre: sudo pkill nombre_proceso. Terminar por PID: kill -9 PID. Para procesos graficos bloqueados: xkill y hacer clic en la ventana bloqueada.
+
+COMANDOS ESENCIALES DE LINUX:
+ls -la: listar archivos con detalles. cd /ruta: cambiar directorio. sudo: ejecutar como superusuario. apt install paquete: instalar software en Ubuntu. systemctl status servicio: ver estado de un servicio. grep texto archivo: buscar texto en archivo. chmod 755 archivo: dar permisos. cp origen destino: copiar. mv origen destino: mover o renombrar. rm archivo: eliminar archivo. passwd: cambiar contrasena.
+
+PROBLEMA: SERVIDOR SSH NO CONECTA:
+Verificar que sshd este activo: sudo systemctl status ssh. Si no esta instalado: sudo apt install openssh-server. Verificar que el firewall permita el puerto 22: sudo ufw allow ssh.

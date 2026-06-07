@@ -1,0 +1,78 @@
+# ══════════════════════════════════════════════════════════════
+# S3 IA Multimodal — Requirements
+# Probado en: macOS Intel/MPS · Python 3.12.3 · 2025-06-04
+#
+# IMPORTANTE: usar Python 3.12 (PyTorch 2.2 no tiene wheel para Py 3.13)
+#   /usr/local/bin/python3.12 -m venv venv
+#
+# Instalación: pip install -r requirements.txt
+# ══════════════════════════════════════════════════════════════
+
+# ── PyTorch (CPU / MPS en macOS) ──────────────────────────────
+# PyTorch 2.2.x es la última versión con wheel para macOS Intel x86_64
+torch==2.2.2
+torchvision==0.17.2
+
+# numpy<2 es necesario: torch 2.2 fue compilado con NumPy 1.x
+# opencv-python 4.8 es la última versión compatible con numpy<2
+numpy<2
+
+# ── STT — faster-whisper (CPU int8, mucho más rápido que openai-whisper)
+faster-whisper>=1.0.0
+
+# ── Embeddings — OpenCLIP ViT-B-32 ───────────────────────────
+open_clip_torch>=2.24.0
+
+# ── Base vectorial local ──────────────────────────────────────
+chromadb>=0.5.0
+
+# ── Audio ─────────────────────────────────────────────────────
+# PortAudio debe estar instalado antes: brew install portaudio
+sounddevice>=0.4.6
+scipy>=1.11.0
+
+# ── Imagen / Video ────────────────────────────────────────────
+Pillow>=10.0.0
+# 4.8.x: última versión compatible con numpy<2
+opencv-python==4.8.1.78
+
+# ── TTS — Piper en español ────────────────────────────────────
+piper-tts>=1.2.0
+
+# ── Interfaz web ──────────────────────────────────────────────
+gradio>=4.26.0
+
+# ── HTTP / Ollama ─────────────────────────────────────────────
+requests>=2.31.0
+
+# ── Utilidades ────────────────────────────────────────────────
+python-dotenv>=1.0.0
+
+# ══════════════════════════════════════════════════════════════
+# NOTAS DE INSTALACIÓN (orden importante):
+#
+# 1. Crear entorno con Python 3.12:
+#    /usr/local/bin/python3.12 -m venv venv
+#    source venv/bin/activate
+#
+# 2. PortAudio (una sola vez, requerido por sounddevice):
+#    brew install portaudio
+#
+# 3. Instalar dependencias:
+#    pip install -r requirements.txt
+#
+# 4. Instalar Ollama y modelos:
+#    brew install ollama
+#    ollama serve          ← en otra terminal
+#    ollama pull tinyllama
+#    ollama pull moondream
+#
+# 5. Descargar modelo Piper TTS:
+#    python audio/download_piper.py
+#
+# 6. Construir base vectorial:
+#    python rag/build_db.py
+#
+# 7. Lanzar sistema:
+#    python app.py         ← http://localhost:7864
+# ══════════════════════════════════════════════════════════════

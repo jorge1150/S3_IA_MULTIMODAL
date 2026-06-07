@@ -1,0 +1,36 @@
+PROBLEMA: PROBLEMAS DE ALMACENAMIENTO
+CATEGORIA: Disco y Almacenamiento
+SISTEMAS: Windows, Linux, macOS
+
+PROBLEMAS COMUNES:
+Tipo 1: Disco lleno, sin espacio disponible.
+Tipo 2: Disco duro con errores o sectores danados.
+Tipo 3: Archivos corruptos o inaccesibles.
+Tipo 4: Disco externo USB no reconocido.
+
+SOLUCION DISCO LLENO EN WINDOWS:
+Paso 1: Abrir el Explorador de archivos, clic derecho en el disco C, Propiedades, Liberar espacio en disco. Marcar todas las opciones incluyendo Archivos temporales de Windows y Papelera de reciclaje.
+Paso 2: Mover archivos personales grandes como videos, fotos y musica a un disco externo o a la nube.
+Paso 3: Eliminar programas no utilizados. Configuracion, Aplicaciones, ver programas instalados ordenados por tamano y desinstalar los que no se usen.
+Paso 4: Si Windows ocupa demasiado espacio, eliminar versiones anteriores de Windows. Herramientas de liberacion de espacio en disco, Limpiar archivos del sistema, Instalacion o instalaciones de Windows anteriores.
+Paso 5: Deshabilitar la hibernacion si no se usa: CMD como admin, ejecutar: powercfg /hibernate off. Esto elimina el archivo hiberfil.sys que puede ocupar varios GB.
+Paso 6: Comprimir carpetas antiguas. Clic derecho en carpeta, Propiedades, Opciones avanzadas, Comprimir contenido para ahorrar espacio en disco.
+
+DIAGNOSTICO DE DISCO CON ERRORES:
+Paso 1: Verificar la salud del disco con la herramienta integrada. CMD como admin: chkdsk C: /f /r. Requiere reiniciar para ejecutarse en el disco del sistema.
+Paso 2: Usar CrystalDiskInfo gratis para ver el estado SMART del disco. Si muestra Advertencia o Malo, hacer respaldo inmediato ya que el disco puede fallar pronto.
+Paso 3: Si el disco hace sonidos de clicking o rasguido, esto indica fallo fisico inminente. Hacer respaldo inmediato y reemplazar el disco.
+Paso 4: Para SSDs, verificar el desgaste de escritura. Los SSDs tienen un numero limitado de ciclos de escritura pero tipicamente duran mas de 5 anos con uso normal.
+
+SOLUCION DISCO EXTERNO NO RECONOCIDO:
+Paso 1: Probar en otro puerto USB. Si el disco requiere alimentacion adicional, usar un cable Y-USB o un hub USB con poder.
+Paso 2: Verificar en el Administrador de Dispositivos si aparece el disco con un error.
+Paso 3: Abrir Administracion de Discos (diskmmgmt.msc). Si el disco aparece pero no tiene letra de unidad, asignarle una.
+Paso 4: Si el disco aparece como RAW en Administracion de Discos, puede estar corrupto. Usar TestDisk gratis para intentar recuperar la tabla de particiones.
+Paso 5: Intentar en otro computador. Si tampoco se reconoce en otro equipo, el disco puede estar fisicamente danado.
+
+LIBERACION DE ESPACIO EN LINUX:
+Comando df -h para ver espacio disponible por particion.
+Comando du -sh /var/log/* para encontrar logs grandes.
+Limpiar cache de apt: sudo apt clean y sudo apt autoremove.
+Eliminar kernels viejos: sudo apt autoremove --purge.

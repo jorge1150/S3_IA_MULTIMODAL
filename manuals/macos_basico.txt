@@ -1,0 +1,44 @@
+PROBLEMAS BASICOS DE MACOS
+CATEGORIA: Sistema Operativo macOS
+VERSIONES: Ventura, Sonoma, Sequoia
+
+PROBLEMA: APLICACION NO ABRE - MENSAJE DANIADA O NO SE PUEDE VERIFICAR:
+macOS bloquea aplicaciones descargadas de internet por seguridad.
+Solucion: Ir a Configuracion del sistema, Privacidad y seguridad, al final de la pagina buscar el mensaje sobre la aplicacion bloqueada y hacer clic en Abrir de todas formas.
+Alternativa desde Terminal: xattr -d com.apple.quarantine /Applications/NombreApp.app
+
+PROBLEMA: MAC MUY LENTO - VENTILADORES RUIDO:
+Proceso en segundo plano consumiendo recursos.
+Solucion paso 1: Abrir Monitor de Actividad en Aplicaciones, Utilidades. Ordenar por porcentaje de CPU. Identificar el proceso que mas consume y forzar su cierre si es desconocido.
+Solucion paso 2: Si el proceso mds_stores consume mucho, Spotlight esta reindexando. Esperar que termine o en Configuracion, Siri y Spotlight, desactivar indexacion temporalmente.
+Solucion paso 3: Si kernel_task usa mucho CPU, es posible que el Mac este sobrecalentado. Apagar 10 minutos para que se enfrie.
+
+PROBLEMA: BATERIA SE AGOTA RAPIDO EN MACBOOK:
+Solucion paso 1: En Monitor de Actividad, pestana Energia, ver que apps consumen mas bateria.
+Solucion paso 2: En Configuracion, Pantallas, reducir el brillo de la pantalla. La pantalla es el mayor consumidor de bateria.
+Solucion paso 3: Deshabilitar actualizaciones automaticas en segundo plano desde Configuracion, General, Actualizacion de Software.
+Solucion paso 4: Si la bateria ya no carga o tiene poca autonomia despues de 3 anos, reemplazar la bateria en un Apple Store o tecnico certificado.
+
+PROBLEMA: DISCO DE ARRANQUE LLENO:
+Solucion paso 1: Menu Apple, Configuracion del Sistema, General, Almacenamiento. Revisar las categorias que mas espacio ocupan.
+Solucion paso 2: Eliminar la carpeta Descargas y vaciar la Papelera.
+Solucion paso 3: Desinstalar aplicaciones desde Launchpad o desde la carpeta Aplicaciones arrastrando al Basurero.
+Solucion paso 4: Optimizar el almacenamiento de fotos activando iCloud para que las fotos originales esten en la nube y solo miniaturas localmente.
+
+PROBLEMA: WIFI LENTO O INTERMITENTE EN MAC:
+Solucion paso 1: Mantener Option y hacer clic en el icono WiFi para ver informacion detallada de la red. Revisar el nivel de ruido y RSSI.
+Solucion paso 2: Renovar la concesion DHCP. Configuracion del Sistema, Red, WiFi, Detalles, TCP/IP, Renovar concesion DHCP.
+Solucion paso 3: Eliminar las preferencias de red. En Terminal: sudo rm /Library/Preferences/SystemConfiguration/com.apple.airport.preferences.plist. Reiniciar.
+
+PROBLEMA: BLUETOOTH NO CONECTA:
+Solucion: Mantener Shift+Option y hacer clic en el icono Bluetooth en la barra de menu. Seleccionar Depurar, Eliminar todos los dispositivos y Restablecer el modulo Bluetooth. Volver a emparejar los dispositivos.
+
+RESTAURAR MACOS SIN PERDER DATOS:
+Reiniciar en Modo Recuperacion manteniendo Command+R en Macs Intel.
+Usar Utilidad de Discos para reparar el disco con Primeros Auxilios.
+Usar Reinstalar macOS para reinstalar el sistema sin borrar datos del usuario.
+Para borrado completo, usar Borrar Mac desde el menu de recuperacion.
+
+RESETS UTILES EN MACOS INTEL:
+Resetear SMC: apagar, mantener Shift+Control+Option+boton encendido 10 segundos.
+Resetear NVRAM: encender y mantener Command+Option+P+R durante 20 segundos.

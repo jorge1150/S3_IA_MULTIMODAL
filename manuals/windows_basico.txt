@@ -1,0 +1,39 @@
+PROBLEMAS BASICOS DE WINDOWS
+CATEGORIA: Sistema Operativo Windows
+VERSIONES: Windows 10, Windows 11
+
+PROBLEMA: PANTALLA AZUL DE LA MUERTE (BSOD):
+La pantalla azul muestra un codigo de error. Anotar el codigo para investigarlo. Causas comunes son drivers incompatibles, RAM defectuosa o disco con errores.
+Solucion: Reiniciar en Modo Seguro. Actualizar o revertir el ultimo driver instalado. Ejecutar sfc /scannow en CMD. Ejecutar chkdsk /f para verificar el disco.
+Si ocurre al instalar un nuevo hardware, ese hardware puede ser incompatible o defectuoso.
+
+PROBLEMA: WINDOWS EXPLORER SE CIERRA SOLO:
+El escritorio o las carpetas se cierran inesperadamente.
+Solucion: CMD como admin, ejecutar: sfc /scannow. Esto repara archivos del sistema corruptos. Si persiste, crear una nueva cuenta de usuario para descartar que el perfil este danado.
+
+PROBLEMA: APLICACIONES NO SE ABREN:
+Hacer doble clic en un programa y no pasa nada.
+Solucion paso 1: Reiniciar el equipo. Muchos problemas de apertura se resuelven con esto.
+Solucion paso 2: Ejecutar la aplicacion como administrador haciendo clic derecho y seleccionando Ejecutar como administrador.
+Solucion paso 3: En CMD ejecutar: sfc /scannow para reparar archivos del sistema.
+Solucion paso 4: Verificar si hay actualizaciones pendientes que bloquean la aplicacion.
+Solucion paso 5: Desinstalar y reinstalar la aplicacion problematica.
+
+PROBLEMA: WINDOWS NO ENCUENTRA DISPOSITIVO:
+Nuevo dispositivo USB o de hardware no es reconocido.
+Solucion: Desconectar y reconectar. Probar en otro puerto USB. Actualizar drivers con Windows Update. Revisar el Administrador de dispositivos buscando el triangulo amarillo de error.
+
+PROBLEMA: ARCHIVOS .EXE NO EJECUTAN:
+Los archivos ejecutables no abren o preguntan con que programa abrir.
+Solucion: En CMD ejecutar: assoc .exe=exefile y ftype exefile="%1" %*. Esto restablece la asociacion de archivos ejecutables.
+
+PROBLEMA: RELOJ DEL SISTEMA INCORRECTO:
+La hora incorrecta causa problemas con certificados de seguridad, correos y actualizaciones.
+Solucion: Configuracion, Hora e idioma, activar Establecer hora automaticamente y Establecer zona horaria automaticamente. Si persiste, la pila CMOS de la placa madre puede estar agotada.
+
+PROBLEMA: WINDOWS LENTO AL ARRANCAR:
+El sistema tarda mucho en llegar al escritorio despues de encender.
+Solucion: Deshabilitar programas de inicio en el Administrador de Tareas, pestana Inicio. Habilitar el Inicio rapido en Configuracion, Sistema, Energia y suspension, Configuracion de energia adicional, Elegir el comportamiento de los botones de inicio/apagado, Activar el inicio rapido.
+
+TECLAS DE ACCESO RAPIDO ESENCIALES DE WINDOWS:
+Windows+L: bloquear la pantalla. Windows+E: abrir el Explorador de archivos. Windows+D: mostrar el escritorio. Windows+R: abrir Ejecutar. Ctrl+Shift+Esc: abrir el Administrador de Tareas. Alt+F4: cerrar la ventana activa. Windows+I: abrir Configuracion.

@@ -1,0 +1,41 @@
+PROBLEMA: PROBLEMAS DE TECLADO Y MOUSE
+CATEGORIA: Perifericos de Entrada
+SISTEMAS: Windows, Linux, macOS
+
+PROBLEMAS DE TECLADO:
+Tipo 1: Teclas no responden o responden incorrectamente.
+Tipo 2: Teclado escribe caracteres incorrectos o en otro idioma.
+Tipo 3: Teclas pegadas o que se repiten solas.
+Tipo 4: Teclado no reconocido al encender.
+
+SOLUCION TECLADO NO RESPONDE EN WINDOWS:
+Paso 1: Desconectar y reconectar el teclado. Para teclados USB probar en otro puerto USB. Para teclados PS2 se requiere reiniciar para que sean reconocidos.
+Paso 2: Verificar en el Administrador de Tareas o de Dispositivos que el teclado aparezca sin errores. Si hay un triangulo amarillo, desinstalar y dejar que Windows lo reinstale.
+Paso 3: Probar con otro teclado para determinar si el problema es el teclado o el sistema.
+Paso 4: En teclados inalambricos, cambiar las pilas. Verificar que el receptor USB dongle este conectado y que el teclado este pareado.
+Paso 5: Deshabilitar las Teclas Filtro y Teclas Adhesivas en Configuracion, Accesibilidad, Teclado. Estas funciones pueden hacer que el teclado ignore pulsaciones rapidas.
+
+SOLUCION TECLADO EN IDIOMA INCORRECTO:
+Paso 1: El problema es la disposicion del idioma del teclado. Ir a Configuracion, Hora e idioma, Idioma. Verificar que el idioma e disposicion sean correctos.
+Paso 2: En la barra de tareas puede aparecer el idioma activo. Hacer clic en el y seleccionar el teclado correcto.
+Paso 3: La combinacion de teclas Windows+Barra espaciadora o Alt+Shift cambia el idioma del teclado en Windows. Si se activo accidentalmente, presionar de nuevo para regresar.
+Paso 4: Eliminar los idiomas de teclado adicionales que no se usen para evitar cambios accidentales.
+
+PROBLEMAS DE MOUSE:
+Tipo 1: El cursor no se mueve o se mueve de forma errante.
+Tipo 2: Los clics no funcionan o funcionan solos.
+Tipo 3: La rueda de desplazamiento no funciona.
+Tipo 4: Mouse lento o con velocidad incorrecta.
+
+SOLUCION MOUSE ERRANTE O QUE NO SE MUEVE:
+Paso 1: Limpiar el sensor optico del mouse con un pano seco. Si hay suciedad en el sensor, el mouse se mueve de forma irregular.
+Paso 2: Cambiar la superficie. Los mouses opticos no funcionan bien sobre superficies transparentes, de vidrio o muy brillantes. Usar un pad de mouse o superficie mate.
+Paso 3: Desconectar y reconectar el mouse USB.
+Paso 4: En mouses inalambricos, cambiar las pilas y asegurarse de que el receptor este cerca, maximo 30 cm de distancia.
+Paso 5: En el Administrador de Dispositivos, desinstalar el mouse y dejar que se reinstale automaticamente.
+
+AJUSTE DE VELOCIDAD DEL MOUSE EN WINDOWS:
+Ir a Configuracion, Bluetooth y dispositivos, Mouse. Ajustar la velocidad del puntero. Tambien desactivar la precision del puntero si el mouse parece acelerarse solo.
+
+TECLADO LAPTOP CON TECLAS DANADAS:
+Conectar un teclado externo USB como solucion temporal. Para reparar el teclado interno se requiere reemplazar el modulo completo del teclado.

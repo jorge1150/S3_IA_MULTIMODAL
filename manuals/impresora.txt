@@ -1,0 +1,36 @@
+PROBLEMA: PROBLEMAS DE IMPRESORA
+CATEGORIA: Perifericos
+SISTEMAS: Windows, Linux, macOS
+
+TIPOS DE PROBLEMAS:
+Tipo 1: La impresora no imprime nada.
+Tipo 2: Impresion con rayas o colores incorrectos.
+Tipo 3: El papel se atasca constantemente.
+Tipo 4: La impresora no es reconocida por el computador.
+
+SOLUCION IMPRESORA NO IMPRIME EN WINDOWS:
+Paso 1: Verificar que la impresora este encendida y conectada. Si es USB, probar con otro cable USB. Si es de red, verificar que este conectada al mismo WiFi que el computador.
+Paso 2: Verificar la cola de impresion. Ir al Panel de control, Dispositivos e impresoras, hacer doble clic en la impresora. Si hay documentos atascados, seleccionarlos todos y cancelarlos.
+Paso 3: Reiniciar el servicio de cola de impresion. En CMD como administrador ejecutar: net stop spooler, luego eliminar archivos en C:\Windows\System32\spool\PRINTERS, luego: net start spooler.
+Paso 4: Eliminar y reinstalar la impresora. En Dispositivos e impresoras, clic derecho en la impresora, Eliminar dispositivo. Volver a agregar la impresora con Agregar una impresora.
+Paso 5: Descargar e instalar el driver mas reciente desde el sitio web del fabricante de la impresora.
+
+SOLUCION IMPRESION CON RAYAS O CALIDAD MALA:
+Paso 1: Ejecutar el proceso de limpieza de cabezales desde las utilidades de la impresora en el Panel de control o desde el software de la impresora.
+Paso 2: Verificar los niveles de tinta o toner. Si alguno esta bajo, reemplazar el cartucho correspondiente.
+Paso 3: Imprimir una pagina de prueba para identificar cual cabezal o color esta fallando.
+Paso 4: Si la impresion es borrosa, ajustar la resolucion de impresion a 600 DPI o superior en las propiedades de impresion.
+Paso 5: Si el papel sale arrugado, revisar que el papel este bien cargado en la bandeja y que sea del tipo correcto.
+
+SOLUCION PAPEL ATASCADO:
+Paso 1: Apagar la impresora antes de retirar el papel atascado para evitar danos.
+Paso 2: Abrir todas las tapas de la impresora y retirar el papel con cuidado jalando en la direccion del recorrido del papel.
+Paso 3: Nunca jalar el papel en sentido contrario al recorrido, puede danar los rodillos.
+Paso 4: Limpiar los rodillos con un pano ligeramente humedecido. Los rodillos sucios son la causa principal de atascos frecuentes.
+Paso 5: Verificar que el papel no este humedo, arrugado o que sea demasiado grueso para la impresora.
+
+IMPRESORA NO RECONOCIDA:
+Paso 1: Cambiar el cable USB por uno de mejor calidad, maximo 2 metros de longitud.
+Paso 2: Conectar directamente al computador sin hubs USB intermedios.
+Paso 3: Verificar en el Administrador de dispositivos si hay dispositivos con error. Desinstalar y dejar que Windows reinstale.
+Paso 4: En impresoras de red, verificar que la IP de la impresora sea estatica para que no cambie al reiniciar el router.
