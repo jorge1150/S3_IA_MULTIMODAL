@@ -14,6 +14,10 @@ faulthandler.enable()   # imprime stack C cuando hay SIGSEGV
 
 # Evita SIGABRT: PyTorch y ONNX (piper-tts) cargan libiomp5.dylib por separado
 os.environ.setdefault("KMP_DUPLICATE_LIB_OK", "TRUE")
+# Limita OpenMP a 1 hilo — evita conflicto ctranslate2 (Whisper) + torch en macOS Intel
+os.environ.setdefault("OMP_NUM_THREADS", "1")
+os.environ.setdefault("OPENBLAS_NUM_THREADS", "1")
+os.environ.setdefault("MKL_NUM_THREADS", "1")
 # Deshabilita telemetría de Gradio (requests externos que pueden causar crashes)
 os.environ.setdefault("GRADIO_ANALYTICS_ENABLED", "False")
 
