@@ -111,7 +111,7 @@ TEMP_DIR: str = os.path.join(BASE_DIR, "temp")
 # ─────────────────────────────────────────────
 GRADIO_PORT: int = 7864
 GRADIO_SERVER: str = "0.0.0.0"
-GRADIO_TITLE: str = "S3 IA Multimodal — Soporte Técnico Local"
+GRADIO_TITLE: str = "IA Multimodal - Soporte Técnico Computadoras Local"
 
 # ─────────────────────────────────────────────
 # CREAR DIRECTORIOS NECESARIOS EN IMPORTACIÓN

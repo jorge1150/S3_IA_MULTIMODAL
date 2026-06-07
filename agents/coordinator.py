@@ -62,7 +62,7 @@ class CoordinatorAgent:
         response = ""
 
         # ── [INICIO] ────────────────────────────────────────────────────────
-        self.log_agent.log("INICIO", "Sistema S3 IA Multimodal arrancado.")
+        self.log_agent.log("INICIO", "Sistema IA Multimodal arrancado.")
         yield stt_text, response, None, self.log_agent.get_all()
 
         # ── [STT] — Voz a texto ─────────────────────────────────────────────

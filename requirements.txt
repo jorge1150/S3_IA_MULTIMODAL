@@ -1,5 +1,5 @@
 # ══════════════════════════════════════════════════════════════
-# S3 IA Multimodal — Requirements
+# IA Multimodal - Soporte Técnico Computadoras Local — Requirements
 # Probado en: macOS Intel x86_64 · Python 3.12
 #
 # IMPORTANTE: requiere Python 3.12 (torch 2.2 no tiene wheel para Py 3.13)

@@ -56,8 +56,8 @@ def build_interface(coordinator) -> gr.Blocks:
         # Header
         gr.HTML("""
         <div class="s3-header">
-            <h1>⚡ S3 IA Multimodal</h1>
-            <p>Soporte Técnico Inteligente · 100% Local · Powered by Ollama + ChromaDB</p>
+            <h1>⚡ IA Multimodal</h1>
+            <p>Soporte Técnico Computadoras · 100% Local · Powered by Ollama + ChromaDB</p>
         </div>
         """)
 

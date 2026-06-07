@@ -71,7 +71,7 @@ def check_vector_db() -> bool:
 def print_banner():
     print("""
 ╔══════════════════════════════════════════════════════════╗
-║          S3 IA MULTIMODAL — SOPORTE TÉCNICO LOCAL        ║
+║    IA MULTIMODAL - SOPORTE TÉCNICO COMPUTADORAS LOCAL    ║
 ║    Ollama + ChromaDB + Whisper + Moondream + Piper TTS   ║
 ╠══════════════════════════════════════════════════════════╣
 ║  Maestría IA Aplicada — UIsrael                          ║

@@ -10,7 +10,8 @@ set -e
 
 echo ""
 echo "╔══════════════════════════════════════════════════════════╗"
-echo "║      S3 IA MULTIMODAL — Instalación Automática          ║"
+echo "║   IA MULTIMODAL - SOPORTE TÉCNICO COMPUTADORAS LOCAL    ║"
+echo "║                  Instalación Automática                 ║"
 echo "╚══════════════════════════════════════════════════════════╝"
 echo ""
 
